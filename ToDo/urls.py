@@ -29,4 +29,8 @@ urlpatterns = [
     path('detail/<int:pk>',views.TaskDetail.as_view(),name='detail'),
     path('status/<int:pk>',views.Task_Status.as_view(),name='status'),
     path('logout/',views.Signout.as_view(),name="logout"),
+    path('completed/',views.Completed_view.as_view(),name='complete'),
+    path('home/',views.Taskhome.as_view(),name='home'),
+    path('userdetails/',views.Userdetailview.as_view(),name='userdetails')
+   
 ]

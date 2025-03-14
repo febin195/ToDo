@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />  
     <style>
         body {
-            background-image: linear-gradient(179.1deg, rgba(255,250,172,1) 10.3%, rgba(13,167,168,1) 148%);
+            background: linear-gradient(to right, #FFDEE9, #B5FFFC);
             min-height: 100vh;
             margin: 0;
             padding: 20px 0;
@@ -116,6 +116,8 @@
                         <th scope="col">Delete</th>
                         <th scope="col">Detail</th>
                         <th scope="col">Status</th>
+                        <th scope="col">Due Date</th>
+                        <th scope="col">Priority Level</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -130,6 +132,8 @@
                         {% else %}
                         <td><i class="fa-solid fa-check"></i></td>
                         {% endif %}
+                        <td>{{i.due_date}}</td>
+                        <td>{{i.priority_level}}</td>
                     </tr>
                     {% endfor %}
                 </tbody>

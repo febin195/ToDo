@@ -83,12 +83,20 @@ class Login(View):
                 # print(request.user)
 
 
-                return redirect("create")
+                return redirect("home")
             
             else:
 
                 return render(request,"login.html")
-            
+class Taskhome(View):
+
+    def get(self,request):
+
+        
+
+        data=TaskModel.objects.filter(user_id=request.user)
+
+        return render(request,"home.html",{'data':data})              
 
 class TaskAdd(View):
 
@@ -110,7 +118,7 @@ class TaskAdd(View):
 
             data=TaskModel.objects.filter(user_id=request.user).order_by('is_completed','created_date')
 
-            return render(request,"addtask.html",{'form':form,'data':data})
+            return render(request,"home.html",{'form':form,'data':data})
 
 
 class TaskAll(View):
@@ -134,7 +142,7 @@ class TaskDelete(View):
 
             data.delete()
             
-            return redirect('create')
+            return redirect('home')
         
         else:
 
@@ -167,7 +175,7 @@ class TaskUpdate(View):
 
         data=TaskModel.objects.filter(user_id=request.user)    
 
-        return redirect('create')
+        return redirect('home')
     
 @method_decorator(decorator=is_user,name='dispatch')    
 class TaskDetail(View):
@@ -195,7 +203,7 @@ class Task_Status(View):
 
             data.save()
 
-        return redirect('create')    
+        return redirect('home')    
 
 
 class Signout(View):
@@ -205,45 +213,44 @@ class Signout(View):
         logout(request)
 
         return redirect('login')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# class Add_task(View):
-#     def get(self,request):
-
-#         form=Taskform
-
-#         return render(request,"index.html",{'form':form})
     
-#     def post(self,request):
 
-#         form=Taskform(request.POST)
+class Completed_view(View):
 
-#         if form.is_valid():
+    def get(self,request):
 
-#             print(form.cleaned_data)
+        data=TaskModel.objects.filter(is_completed=True,user_id=request.user)
 
-#             TaskModel.objects.create(**form.cleaned_data)
+        return render(request,'completed.html',{'data':data})  
 
-#             return render(request,"index.html",{"form":form}) 
+
+class Userdetailview(View):
+
+    def get(self,request):
+
+        total=TaskModel.objects.filter(user_id=request.user).count()
+
+        incompleted=TaskModel.objects.filter(user_id=request.user,is_completed=False).count()
+
+        completed=total-incompleted
+
+        
+
+        return render(request,'userdetail.html',{'total':total,'incompleted':incompleted,'completed':completed})      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
            
     

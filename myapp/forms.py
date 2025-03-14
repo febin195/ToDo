@@ -26,7 +26,7 @@ class Taskform(forms.ModelForm):
 
         model=TaskModel
 
-        fields=["task_name"]
+        fields=["task_name","due_date","priority_level"]
 
 
 
